@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.7.0 <0.9.0;
+
+contract Storage {
+    uint256 private count;
+
+    event CountUpdated(uint256 newCount);
+
+    constructor() {
+        count = 10;
+    }
+
+    function getCount() public view returns (uint256) {
+        return count;
+    }
+
+    function incrementCount(uint256 value) public {
+        count += value;
+        emit CountUpdated(count);
+    }
+
+    function decrementCount(uint256 value) public {
+        require(count >= value, "Count cannot be negative");
+        count -= value;
+        emit CountUpdated(count);
+    }
+}
